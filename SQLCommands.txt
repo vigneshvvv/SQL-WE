@@ -1,0 +1,83 @@
+use sessionSeven
+
+CREATE TABLE userDetails(
+id INT PRIMARY KEY,
+userName VARCHAR(30),
+mobileNumber VARCHAR(40)
+)
+
+select * from userDetails
+
+ALTER TABLE userDetails ADD COLUMN emailID VARCHAR(30)
+
+ALTER TABLE userDetails RENAME COLUMN emailID to email
+
+ALTER TABLE userDetails MODIFY COLUMN email VARCHAR(60)
+
+ALTER TABLE userDetails DROP COLUMN email
+
+INSERT INTO userDetails VALUES (1, "Vignesh", "+919883338")
+
+select * from userDetails
+
+
+INSERT INTO userDetails (id, mobileNumber, userName) VALUES (2,"+91828393", "ARUN")
+
+INSERT INTO userDetails VALUES (3, "Arjun", "+9121131"),
+(4, "Rahul", "+91234343"),
+(5, "Ranjith", "+9123124413")
+
+select userName,mobileNumber from userDetails
+
+select * from userDetails limit 2
+
+CREATE TABLE productInfo(
+id INT PRIMARY KEY,
+productName VARCHAR(30),
+category VARCHAR(30),
+price INT
+)
+
+INSERT INTO productInfo VALUES (1, "mobile", "Electronics", 30000),
+(2, "latop", "Electronics", 50000),
+(3, "Mouse", "Electronics", 500),
+(4, "The ART", "Book", 1000)
+
+select * from productInfo
+
+select * from productInfo where category = "Electronics"
+
+select * from productInfo where category = "Electronics" and price > 10000
+
+select * from productInfo where category = "Electronics" and category="Book"
+
+select * from productInfo where category IN ("Electronics", "Book") 
+
+select * from productInfo where category = "Electronics" OR price > 500
+
+UPDATE productInfo SET price = 700 where id = 3
+
+DELETE from productInfo where id = 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
