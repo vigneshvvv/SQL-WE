@@ -59,6 +59,66 @@ UPDATE productInfo SET price = 700 where id = 3
 
 DELETE from productInfo where id = 4
 
+5,2 -> 999.9-- 9
+6,2 -> 9999.99
+-- 8,2 -> 99999.99
+-- 3,2 -> 10.00
+
+CREATE TABLE Employees(
+emp_id int AUTO_INCREMENT PRIMARY KEY,
+emp_name VARCHAR(30),
+department VARCHAR(20),
+salary DECIMAL(10,2)
+)
+
+select * from Employees
+
+INSERT INTO Employees ( department, salary) values 
+("DEV", 60000)
+("Ranjith", "HR", 50000)
+
+
+select MAX(salary) from Employees
+
+select MIN(salary) from Employees
+select * from Employees where salary = 80000
+
+select * from Employees where salary = (select Max(salary) from Employees)
+
+
+select SUM(salary) from Employees
+
+select AVG(salary) from Employees
+
+select COUNT(*) as noOfEmployees from Employees where department = 'DEV'
+
+CREATE TABLE EmployeeInfo(
+emp_id int AUTO_INCREMENT PRIMARY KEY,
+emp_name VARCHAR(30) NOT NULL,
+department VARCHAR(30) DEFAULT 'Trainee',
+salary DECIMAL(10,2) NOT NULL,
+place VARCHAR(20)
+)
+INSERT INTO EmployeeInfo(emp_name,salary,place) 
+VALUES ('Yeswanth',30000, 'Trichy'),
+('Revanth', 'DEV', 70000, 'Chennai'),
+('Rahul', 'HR', 50000, 'Delhi'),
+('Ashok', 'cloud', 80000, 'Madurai')
+
+select * from EmployeeInfo
+
+select place, count(*) from EmployeeInfo group by place
+
+select department, count(*) as noByDep from EmployeeInfo 
+group by department HAVING noByDep > 1
+
+select * from EmployeeInfo ORDER BY salary DESC
+
+select * from EmployeeInfo ORDER BY salary ASC
+
+
+
+
 
 
 
