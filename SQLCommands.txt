@@ -76,8 +76,6 @@ select * from Employees
 INSERT INTO Employees ( department, salary) values 
 ("DEV", 60000)
 ("Ranjith", "HR", 50000)
-
-
 select MAX(salary) from Employees
 
 select MIN(salary) from Employees
@@ -116,17 +114,72 @@ select * from EmployeeInfo ORDER BY salary DESC
 
 select * from EmployeeInfo ORDER BY salary ASC
 
+CREATE TABLE CustomerData(
+customer_id INT PRIMARY KEY,
+customer_name VARCHAR(20),
+city VARCHAR(20)
+)
+
+CREATE TABLE ProductData(
+product_id int primary key,
+product_name VARCHAR(30),
+price DECIMAL(10,2)
+)
+
+CREATE TABLE OrderInfo(
+order_id int primary key,
+customer_id int,
+product_id int,
+quantity int,
+FOREIGN KEY (customer_id) REFERENCES CustomerData(customer_id),
+FOREIGN KEY (product_id) REFERENCES ProductData(product_id)
+)
+
+INSERT INTO CustomerData VALUES 
+(1, "Rajesh", "chennai"), (2, "viki", "Trichy"),
+(3, "Devanathan", "Madurai"), (4, "Revanth", "Delhi")
+
+INSERT INTO ProductData VALUES
+(1005, "Toggle", 500),
+(1002, "Headphone", "4000"),
+(1003, "Earpod", 30000),
+(1004, "Laptop", 50000)
+
+select * from ProductData
+
+INSERT INTO OrderInfo VALUES 
+(1, 1, 1003, 1),
+(2, 1, 1004, 2),
+(3, 2, 1001, 1),
+(4, 3, 1002, 3)
+
+select * from OrderInfo
+
+select c.customer_name, c.city, p.product_name,p.price,o.quantity 
+from OrderInfo o
+JOIN CustomerData c ON o.customer_id = c.customer_id
+JOIN ProductData p ON o.product_id = p.product_id
+
+select c.customer_name, c.city, p.product_name,p.price,o.quantity
+from CustomerData c
+LEFT JOIN OrderInfo o ON o.customer_id = c.customer_id
+LEFT JOIN ProductData p ON o.product_id = p.product_id
+
+select c.customer_name, c.city, p.product_name,p.price,o.quantity
+from CustomerData c
+RIGHT JOIN OrderInfo o ON o.customer_id = c.customer_id
+RIGHT JOIN ProductData p ON o.product_id = p.product_id
 
 
-
-
-
-
-
-
-
-
-
+select c.customer_name, c.city, p.product_name,p.price,o.quantity
+from CustomerData c
+LEFT JOIN OrderInfo o ON o.customer_id = c.customer_id
+LEFT JOIN ProductData p ON o.product_id = p.product_id
+UNION
+select c.customer_name, c.city, p.product_name,p.price,o.quantity
+from CustomerData c
+RIGHT JOIN OrderInfo o ON o.customer_id = c.customer_id
+RIGHT JOIN ProductData p ON o.product_id = p.product_id
 
 
 
