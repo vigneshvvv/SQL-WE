@@ -181,6 +181,29 @@ from CustomerData c
 RIGHT JOIN OrderInfo o ON o.customer_id = c.customer_id
 RIGHT JOIN ProductData p ON o.product_id = p.product_id
 
+select c.customer_name, c.city, p.product_name,p.price,o.quantity 
+from OrderInfo o
+JOIN CustomerData c ON o.customer_id = c.customer_id
+JOIN ProductData p ON o.product_id = p.product_id where o.quantity >= 2 and c.city = 'chennai'
+
+select c.customer_name, SUM(o.quantity) as total_quantity from OrderInfo o
+JOIN CustomerData c ON o.customer_id = c.customer_id group by c.customer_name
+
+select c.customer_name, COUNT(o.order_id) as noOfOrders from OrderInfo o
+JOIN CustomerData c ON o.customer_id = c.customer_id
+group by c.customer_name
+
+select c.customer_name, COUNT(o.order_id) as noOfOrders from CustomerData c
+LEFT JOIN OrderInfo o ON o.customer_id = c.customer_id
+group by c.customer_name
+
+select c.customer_name, SUM(o.quantity * p.price) as totalOrderPrice
+from OrderInfo o 
+JOIN CustomerData c ON o.customer_id = c. customer_id
+JOIN ProductData p ON o.product_id = p.product_id
+group by c.customer_name order by totalOrderPrice DESC limit 1
+
+
 
 
 
