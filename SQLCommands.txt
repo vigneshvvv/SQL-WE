@@ -204,7 +204,67 @@ JOIN ProductData p ON o.product_id = p.product_id
 group by c.customer_name order by totalOrderPrice DESC limit 1
 
 
+select * from Employees
 
+select AVG(salary) from Employees
+
+select * from Employees where salary > (select AVG(salary) from Employees)
+
+select department from Employees GROUP BY department HAVING count(*) > 1
+
+select * from Employees where department in (
+select department from Employees group by department HAVING count(*) > 1
+)
+
+select * from Employees where department not in (
+select department from Employees group by department HAVING count(*) > 1
+)
+select salary from Employees where department = 'HR'
+
+select * from Employees where salary > ANY (
+select salary from Employees where department = 'HR'
+)
+
+select * from Employees where salary > ALL (
+select salary from Employees where department = 'HR'
+)
+
+
+select * from (
+select department, AVG(salary) as avg_salary from Employees GROUP BY department
+) as Temp where avg_salary > 50000
+
+
+select * from (
+select department, AVG(salary) as AVG_salary from Employees  group by department
+) as TEMP
+
+
+select * from Employees e where salary >(
+select AVG(e2.salary) as average_salary from Employees e2  where e2.department = e.department
+)
+
+
+select emp_name, department, salary, AVG(salary) OVER() as avg_salary from Employees
+
+select emp_name, department, salary, AVG(salary) OVER(PARTITION BY department) as dep_avg
+from Employees 
+
+select emp_name, department, ROW_NUMBER() over(
+ORDER BY salary DESC
+) as row_num from Employees
+
+select * from Employees 
+
+select emp_name, department, salary, RANK() OVER(
+order by salary DESC
+)as rnk from Employees
+
+select * from (
+select emp_name, department, salary, RANK() OVER(
+order by salary DESC
+)as rnk from Employees
+)as t where rnk = 2
 
 
 
